@@ -6,14 +6,63 @@ $current_student_id = 100;
 $container_level = array();
 $student_progress = array("current_learning_mode" => "skill", "is_pool_container" => 0, "correct_in_sequence" => 0, "wrong_in_sequence" => 0, 
 						"active_container" => "",
-						"container_array" => array(),
-						"current_positions_in_containers" => array(),
-						"stack" => array() 
-					);	
+						"container_array" => array(
+							0 =>	array(	
+									"id" 			=> "TT050",
+									"attempt_num" 	=> 1,
+									"trail"			=> "",					// The trail is used to locate the correct container (TT) and attempt number through 											// which this element was activated since a cluster can be in multiple TT's, etc.
+								   	"status" 		=> "IN_PROGRESS",		// NOT_STARTED, IN_PROGRESS, COMPLETED, FAILURE, SUCCESS
+								   	"failure_num"	=> 0,
+								   	"element_performance" => array("SUCCESS" => 1, "FAILURE" => 0, "COMPLETED" => 0, "IN_PROGRESS" => 1, "UNATTEMPTED" => 23, "TOTAL" => 25),
+								   	"attempted_elements" => array("FRA003" => "SUCCESS", "FRA004" => "IN_PROGRESS"),
+								   	"unattempted_elements"	=> array(3 => 'FRA016', 4 => 'FRA012', 5 => 'WNC011', 6 => 'FRA006', 7 => 'FRA009', 8 => 'FRA010', 9 => 'FRA032', 10 => 'FRA010', 10 => 'FRA011', 12 => 'FRA010', 13 => 'FRA013', 14 => 'REA016', 15 => 'FRA013', 16 => 'FRA007', 17 => 'FRA006', 18 => 'FRA008', 19 => 'FRA005', 20 => 'FRA018', 21 => 'FRA014', 22 => 'REA036', 23 => 'REA062'),
+								   	"last_element_status"	=> "IN_PROGRESS" // (UNDEFINED | NOT_STARTED | IN_PROGRESS | SUCCESS | FAILURE | COMPLETED)
+								   	),
 
-echo "<xmp>";
-print_r($student_progress);
-echo "</xmp>";
+							1 =>	array(
+			   						"id"			=> "FRA003",
+			   						"attempt_num"	=> 1,
+			   						"trail"			=> "TT050(1)",			// Meaning reached in the first attempt of TT050
+			   						"status"		=> "SUCCESS",
+			   						"failure_num"	=> 0,
+			   						"element_performance" => array("SUCCESS" => 1, "FAILURE" => 0, "COMPLETED" => 0, "IN_PROGRESS" => 1, "UNATTEMPTED" => 14, "TOTAL" => 16),
+			   						"attempted_elements" => array("FRA003_SDL_1" => "SUCCESS", "FRA003_SDL_2" => "IN_PROGRESS"),
+			   						"unattempted_elements"	=> array(3 => "FRA003_SDL_3", 4 => "FRA003_SDL_4", 5 => "FRA003_SDL_5", 6 => "FRA003_SDL_6", 7 => "FRA003_SDL_7", 8 => "FRA003_SDL_8", 9 => "FRA003_SDL_9", 10 => "FRA003_SDL_10", 11 => "FRA003_SDL_11", 12 => "FRA003_SDL_12", 13 => "FRA003_SDL_13", 14 => "FRA003_SDL_14", 15 => "FRA003_SDL_15", 16 => "FRA003_SDL_16"),
+			   						"last_element_status"	=> "IN_PROGRESS" 
+			   					),
+
+							2 =>	array(
+					   				"id"			=> "FRA003_SDL_1",
+			   						"attempt_num"	=> 1,
+			   						"trail"			=> "TT050(1)|FRA003(1)",
+			   						"status"		=> "SUCCESS",
+			   						"failure_num"	=> 0,
+			   						"element_performance" => array("SUCCESS" => 1, "FAILURE" => 1, "COMPLETED" => 0, "IN_PROGRESS" => 0, "UNATTEMPTED" => 1, "TOTAL" => 3),
+			   						"attempted_elements"			=> array("7002" => "FAILURE", "7037" => "SUCCESS"),
+			   						"last_element_status" => "SUCCESS",	
+			   						"unattempted_elements"	=> array(7040),			   						
+			   					),
+
+							3 =>	array(
+					   				"id"			=> "FRA003_SDL_2",
+			   						"attempt_num"	=> 1,
+			   						"trail"			=> "TT050(1)|FRA003(1)",
+			   						"status"		=> "FAILURE",
+			   						"failure_num"	=> 0,
+			   						"element_performance" => array("SUCCESS" => 0, "FAILURE" => 3, "COMPLETED" => 0, "IN_PROGRESS" => 0, "UNATTEMPTED" => 0, "TOTAL" => 3),
+			   						"attempted_elements" => array("7028" => "FAILURE", "7045" => "FAILURE", "7046" => "FAILURE"),
+			   						"last_element_status" => "FAILURE",
+			   						"unattempted_elements"	=> array(),			   						
+			   					),							
+							),
+						"container_index" => array("TT050" => array(0), "FRA003" => array(2, 12), "FRA003_SDL_1" => array(3, 11)),
+//						"current_positions_in_containers" => array(),
+						"current_positions_in_containers" => array("TT050" => "TT050(1)|FRA003(1)|FRA003_SDL_2(1)|7045"),
+						// For the above, earlier did "current_positions_in_containers" => array("TT050" => "FRA003", "FRA003" => "FRA003_SDL_3", "FRA003_SDL_3" => "7043"), but realised that would not work as a cluster could come in another TT also, so tried array("TT050" => array("FRA003" => array("FRA003_SDL_2" => "7045"))) before changing to the current
+						// Also the element shown is the *element just asked / already asked* not the element *to be asked*
+						"stack" => array() 
+
+					);	
 
 $count = 0;
 while(1)
@@ -27,138 +76,14 @@ while(1)
 	if (!isset($student_progress["active_container"]) || ($student_progress["active_container"] == ""))
 	{	echo "Choose a TT (TT050, TT051, TT052)...<br>...Assuming TT050 chosen<br>";
 		$active_container = "TT050";
-		$trail = "";
-		set_active_container($active_container);
-		$attempt_number = get_attempt_number($active_container, $trail);
-	}
-		
-	if (isset($student_progress["current_positions_in_containers"][$active_container]))
-	{	$container_levels = $student_progress["current_positions_in_containers"][$active_container];	
-		$levels_arr = explode("|", $container_levels);	
-		$curr_level = count($levels_arr) - 1;
-	} else
-	{	$curr_level = 0;
-		$levels_arr[$curr_level] = $active_container."(".$attempt_number.")";
-		create_container_progress_record($levels_arr, $curr_level);
-
-		while (is_container($levels_arr, $curr_level))
-		{	find_first_element_and_set_trail($levels_arr, $curr_level, $trail);
-			create_container_progress_record($levels_arr, $curr_level);		
-		}	
-	}
-
-	find_next_element($levels_arr, $curr_level-1); // Get logic from container element at $container[$num_levels-2] (SDL) (the question is at $num_levels-1)
-	ask_item_and_get_response($levels_arr, $curr_level);
-
-	$count++;
-	echo "Item ".$count."<br>";
-	if ($count == $max_ques) $exceptional_condition[$current_student_id] = "SESSION_END";
-}
-
-echo "<xmp>";
-print_r($student_progress);
-echo "</xmp>";
-
-echo "Reached program end<br>";
-
-///////////////////////// FUNCTIONS ////////////////////////////
-
-function set_active_container($container_id)
-{	$key_value_changes = array("active_container" => $container_id);
-	if (is_pool_container($container_id)) $key_value_changes["is_pool_container"] = true; else $key_value_changes["is_pool_container"] = false;
-	update_student_progress($student_progress, $container_id, 0, 0, $key_value_changes);
-} 
-
-function update_student_progress(&$student_progress, $container_id, $trail_num, $attempt_num, $key_value_changes)
-{	list($container_key, $student_progress_key) = get_container_and_student_progress_keys($container_id);
-	$student = &$student_progress['container_array'][$student_progress_key]['trails'][$trail_num]['attempts'][$attempt_num];
-
-	foreach ($key_value_changes as $key => $value)
-	{	switch ($key)
-		{	case "current_learning_mode":
-			case "is_pool_container": 
-			case "correct_in_sequence": 
-			case "wrong_in_sequence":
-			case "active_container":	$student_progress[$key] = $value;
-										break;
-
-			case "latest_attempt":		$student_progress['container_array'][$student_progress_key]['latest_attempt'] = $value;
-										break;
-
-			case "failure_num":			$student_progress['container_array'][$student_progress_key]['trails'][$trail_num] = $value;
-										break;
-
-			default:					if (!isset($student[$key]))
-										{	echo "Line 69: Invalid key ".$key."<br>";
-											break;
-										} 
-										$student[$key] = $value;
-										break;
-		}
-	}
-}
-
-function get_container_key($container_id)		// like TT005 or FRA003
-{	global $container_array; 
-	$container_key = -1;
-
-	foreach ($container_array as $key => $value)
-	{	if ($value["id"] == $container_id) 
-		{	$container_key = $key;
-			break;
-		}	
-	}
-
-	return($container_key);
-}
-
-function student_progress_keys($container_id, $options)		// $container_id - TT005 or FRA003. Options array - $trail/$attempt_num, corresponding keys returned
-{	global $student_progress; 
-	$student_progress_key = -1;
-
-	foreach ($student_progress["container_array"] as $key => $value)
-	{	if ($value["id"] == $container_id) 
-		{	$student_progress_key = $key;
-			break;
-		}	
-	}
-
-	return(array($student_progress_key));
-}
-
-function is_pool_container($container_id)
-{	global $container_array, $student_progress; 
-	list($container_key, $student_progress_key) = get_container_and_student_progress_keys($container_id);
-	if ((isset($container_array[$container_key]["is_pool_container"])) && ($container_array[$container_key]["is_pool_container"])) 
-		return true; 
-	else return false;
-}
-
-function handle_exceptional_condition($exceptional_code)
-{	switch ($exceptional_code)
-	{	case "SESSION_END":		echo "End of session<br>";
-								break;
-
-	}
-}
-
-function get_attempt_number($active_container, $trail)
-{	global $container_array, $student_progress; 
-	list($container_key, $student_progress_key) = get_container_and_student_progress_keys($container_id);
-
-
-
-}
-
-
-/*********************/
-/*
+		set_active_container($active_container, $student_progress);
 
 		if (isset($student_progress["current_positions_in_containers"][$active_container]))		// Check if there is already a prior position in this container
 		{	$container_levels = $student_progress["current_positions_in_containers"][$active_container];	// If so, get the full array till the final element in $container_level
 			$levels_arr = explode("|", $container_levels);	// Get logic from container element at $container[$num_levels-2] (SDL) ($container[$num_levels-1] is the question)
 			$num_level = count($levels_arr);
 			$curr_level = $num_level-2;
+
 			find_next_element($levels_arr, $curr_level);		// Return updated $levels_arr which will contain next element OR 'ACTIVE_CONTAINER_COMPLETE' (TT complete))
 		} 
 		else 
@@ -274,6 +199,7 @@ function create_container_progress_record($levels_arr, $curr_level, $container_i
 echo "Line 196 Entering create_container_progress_record: curr_level = ".$curr_level."<xmp>";
 print_r($levels_arr);
 echo "</xmp>";
+	$this_trail = "";
 
 	if ($container_id == "")			// This means this is a highest level container and the container_id is the same as the Levels_arr[0]. Also, $this_trail = ""
 	{	preg_match('/(.*)\((\d+)\)/', $levels_arr[$curr_level], $matches);
@@ -286,7 +212,6 @@ echo "</xmp>";
 	}	
 
 echo "Line 208 in create_container_progress_record: container_id = ".$container_id."<br>";
-$this_trail = "";
 
 	$max_past_attempt = 0;
 	$max_past_failure_this_trail = -1;
@@ -341,8 +266,41 @@ function get_first_element(&$levels_arr, &$curr_level)
 
 }
 
+function get_student_progress_key($container_id_with_attempt_num)		// like TT005(2)
+{	global $student_progress; 
+	echo "Line 247: container_id_with_attempt_num = ".$container_id_with_attempt_num."<br>";
+	preg_match('/(.*)\((\d+)\)/', $container_id_with_attempt_num, $matches);
+	$container_id = $matches[1];
+	$attempt_num = $matches[2];
 
+	$container_key = get_container_key($container_id);
+	foreach ($student_progress["container_array"] as $key => $value)
+	{	if (($value["id"] == $container_id) && ($value["attempt_num"] == $attempt_num)) 
+			return(array($container_key, $key));
+	}
+	return(-1);
 
+//	return(substr($container_id_with_attempt_num, 0, strpos($container_id_with_attempt_num, "(")));
+
+}
+function set_active_container($container_id, &$student_progress)
+{	$student_progress["active_container"] = $container_id; 
+	$student_progress["is_pool_container"] = is_pool_container($container_id, $student_progress);
+} 
+
+function is_pool_container($container_id, &$student_progress)
+{	$key = get_container_key($container_id);
+	if ($key == -1) return(-1); 
+	if (isset($container_array[$key]["is_pool_container"])) $student_progress["is_pool_container"] = 1; else unset($GLOBALS['student_progress']['is_pool_container']);
+}
+
+function handle_exceptional_condition($exceptional_code)
+{	switch ($exceptional_code)
+	{	case "SESSION_END":		echo "End of session<br>";
+								break;
+
+	}
+}
 
 function ask_item_and_get_response(&$levels_arr, &$curr_level, &$student_progress)
 {	global $container_array;
@@ -394,6 +352,87 @@ $response = array(	"result" => $rand_result,
 	return ($response);								// Considered directly updating $student_progress. But other updates will be needed. So let calling program do. 
 }
 
+function get_container_key($container_id)
+{	global $container_array;
+	foreach ($container_array as $key => $value)
+	{	if ($value["id"] == $container_id) return($key);
+	}
+	return(-1);
+
+}
+
+echo "<xmp>";
+print_r($student_progress);
+echo "</xmp>";
+/* 
+Pool Element: Pool elements are fixed tests, timed tests, worksheets, etc, where except for an exceptional condition, the pool will be completed element by element.
+So when a pool element is active, "in_pool_element" will be 1, and the entire pool will be copied into "pool_items"
+
+Issues of Active Container and Stack: While current positions can be there in multiple containers (Mindspark Maths TTs), the 'active' container can be only 1.
+Is there any situation where a student in Mindspark Maths is NOT in a TT (can't think of any) 
+
+There can be only one active container. As long as we only consider Teacher Topics, this is fine. But if we allow students to choose 'non-flow games' by going to 
+a 'Game Zone' or similarly choose to (or be assigned to) work on a Worksheet, then what is the 'Container'?
+
+The issue of Stack is related. A Stack works First-In Last-Out (FILO) and records the place to which control should return.
+
+Some other actions: 
+choose_topic() 				[This will show the Topic Selection Screen]
+show_session_report() 		[This will show the Session Report]
+
+*****
+Should current_positions_in_containers be stored as nested arrays or a string. Currently favouring the latter, the older code in the former case was:
+
+	if (isset($student_progress["current_positions_in_containers"][$active_container]))		// Check if there is already a prior position in this container
+	{	$current_level = $student_progress["current_positions_in_containers"];				// If so, get the full array till the final item in $container_level
+
+		while (isset($current_level))
+		{	if (is_array($current_level))
+			{	$container_level[$level++] = key($current_level);
+				$current_level = reset($current_level);
+			} else
+			{	$container_level[$level++] = $current_level;
+				$last_item_id = $current_level;
+				unset($current_level);
+			}	
+		}
+	.
+	}
+
 
 */
+
+
+
+
+
+
+/************************
+ * A basic element can be run (eg. game) or 'asked' (eg. question, challenge question)
+ * A container element contains basic elements or containers in sequential, partly sequential or non-sequential order eg. SDL, timed test, cluster, TT, etc
+ * Every container element has a Failed_Elements_Array recording the elements that were not cleared. It also has total_elements, attempted_elements, correct_elements
+ * 
+ * Consider a cluster and an SDl. Both are container elements. In fact a cluster is typically made up of SDLs
+ * 
+ * 
+ * A cluster contains SDLs is sequential order while an SDL contains questions in non-sequential order
+ * Adaptive logic of cluster:
+ * 	 - SDL success when any element of the SDl (question) is answered correctly 
+ * 	 - On SDL success, move to next SDL
+ *   - On SDL 'no_elements_left_to_ask', move to nextt SDL
+ *   - On SDL failure, ask another question (not asked) from SDL
+ * 
+ * Adaptive logic 1 of SDL:
+ *   - On Question success, exit SDL
+ * 
+ * Adaptive logic 2 of SDL:
+ *   - On attempted_elements = 0.8 * total_elements, exit SDL
+ *   
+ ***********************/
+
+
+
+
+echo "Reached program end<br>";
+
 ?>
