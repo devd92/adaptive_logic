@@ -1,0 +1,39 @@
+<?php>
+
+$student_progress = array(
+	"current_learning_mode" => "skill", 
+	"is_pool_container" => 0, 
+	"correct_in_sequence" => 0, 
+	"wrong_in_sequence" => 0, 
+	"active_container" => "",
+	"container_array" => array(
+		1 => array(
+			"id" => "FRA003",
+			"latest_attempt" => array("trail_id" => "TT050(1)", "attempt_num" => 1),
+			"trails" => array(
+				0 => array(
+					"trail_id" => "TT050(1)",			// Meaning reached in the first attempt of TT050
+					"failure_num"	=> 0,
+					"attempts"	=> array(
+					1 => array(
+						"status" => "SUCCESS",
+						"element_performance" => array("SUCCESS" => 1, "FAILURE" => 0, "COMPLETED" => 0, "IN_PROGRESS" => 1, "UNATTEMPTED" => 14, "TOTAL" => 16),
+						"attempted_elements" => array("FRA003_SDL_1" => "SUCCESS", "FRA003_SDL_2" => "IN_PROGRESS"),
+						"unattempted_elements" => array(3 => "FRA003_SDL_3", 4 => "FRA003_SDL_4", 5 => "FRA003_SDL_5", 6 => "FRA003_SDL_6", 7 => "FRA003_SDL_7", 8 => "FRA003_SDL_8", 9 => "FRA003_SDL_9", 10 => "FRA003_SDL_10", 11 => "FRA003_SDL_11", 12 => "FRA003_SDL_12", 13 => "FRA003_SDL_13", 14 => "FRA003_SDL_14", 15 => "FRA003_SDL_15", 16 => "FRA003_SDL_16"),
+						"last_element_status" => "IN_PROGRESS" 
+						)
+					)	
+				)
+			)
+		)
+	),
+	"current_positions_in_containers" => array(),
+	"stack" => array() 
+);	
+
+
+
+$student_progress['container_array'][1]['trails'][0]['attempts'][1]
+$levels_arr and $curr_level
+
+?>
