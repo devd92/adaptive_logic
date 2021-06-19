@@ -6,10 +6,10 @@ $student_progress = array(
 	"correct_in_sequence" => 0, 
 	"wrong_in_sequence" => 0, 
 	"active_container" => "",
+	"current_positions_in_containers" => array(),
 	"container_array" => array(
-		1 => array(
+		0 => array(
 			"id" => "FRA003",
-			"latest_attempt" => array("trail_id" => "TT050(1)", "attempt_num" => 1),
 			"trails" => array(
 				0 => array(
 					"trail_id" => "TT050(1)",			// Meaning reached in the first attempt of TT050
@@ -27,11 +27,8 @@ $student_progress = array(
 			)
 		)
 	),
-	"current_positions_in_containers" => array(),
 	"stack" => array() 
 );	
-
-
 
 $student_progress['container_array'][1]['trails'][0]['attempts'][1]
 $levels_arr and $curr_level
