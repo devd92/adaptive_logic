@@ -1,10 +1,14 @@
 <?php
 include './mindspark_content.php';
 
-$max_ques = 7;				// Dummy to simulate, say, end of session
+echo "Usage: <span style='font-family:monospace;'>adaptive_logic.php?max_ques=15&logic=MS</span>&nbsp;&nbsp;|&nbsp;&nbsp;MS can be replaced by ASSET or DA.<hr>";
+
+$max_ques = (isset($_REQUEST['max_ques'])) ? $_REQUEST['max_ques'] : 17;
+$logic = (isset($_REQUEST['logic'])) ? $_REQUEST['logic'] : "MS";
+
 $current_student_id = 100;
-$position_array = array("levels_arr" => array(), "curr_level" => -1, "container_id" => "", "is_container" => 0, "student_progress_key" => -1, "trail_str" => "", "trail_key" => -1, "attempt_num" => -1);
-$student_progress = array("current_learning_mode" => "skill", "is_pool_container" => 0, "correct_in_sequence" => 0, "wrong_in_sequence" => 0, 
+$position_array = array("levels_arr" => array(), "curr_level" => -1, "container_id" => "", "is_container" => 0, "student_progress_key" => -1, "trail_str" => "", "trail_key" => -1, "attempt_num" => -1, "is_pool_container" => 0);
+$student_progress = array("current_learning_mode" => "skill", "correct_in_sequence" => 0, "wrong_in_sequence" => 0, 
 						"active_container" => "",
 						"current_positions_in_containers" => array(),
 						"container_array" => array(),
@@ -15,22 +19,38 @@ echo "<xmp>";
 print_r($student_progress);
 echo "</xmp>";
 
-echo "Max questions = ".$max_ques."<br>";
-
 $count = 0;
 while(1)
 {	if (isset($exceptional_condition[$current_student_id])) 
 	{	handle_exceptional_condition($exceptional_condition[$current_student_id]);
 		break;
 	}	
-	if ($student_progress["is_pool_container"] && (count($student_progress["pool_items"]) > 0)) get_next_pool_element();
+	if (isset($student_progress["is_pool_container"]) && ($student_progress["is_pool_container"] == 1)) 		 			// Will not be true the first time for a pool container (as it has not yet been set) which is fine
+	{	if (!get_next_pool_element($position_array))
+		{	record_pool_container_data($position_array);
+			break;
+		}	
+		continue;
+	}
+		
 	if ($student_progress["current_learning_mode"] == "exposure") exposure_logic();
  
 	// No active container means for example that no Teacher Topic is currently active
 	if (!isset($student_progress["active_container"]) || ($student_progress["active_container"] == ""))
-	{	echo "<hr>Choose a TT (TT050, TT051, TT052)...<br>...Assuming TT050 chosen<hr>";
-		$active_container = "TT050";
-		$position_array['trail_str'] = "";							// trail_str will be "" for a teacher topic, something like "TT050(1)|FRA003(2)" for an SDL, etc. 
+	{	echo "Line 41 logic = ".$logic."<br>";
+		switch ($logic)
+		{	case "ASSET":	$active_container = "ASSET_19C";
+							break;
+
+			case "DA":		$active_container = "DA_43449939887782021_2";
+							break;
+
+			default:		echo "<hr>(Temp) Max questions = ".$max_ques."<br>";
+							echo "Choose a TT (TT050, TT051, TT052)...<br>...Assuming TT050 chosen<hr>";
+							$active_container = "TT050";
+		}
+
+		$position_array['trail_str'] = "";		// trail_str will be "" for a teacher topic or assessment, something like "TT050(1)|FRA003(2)" for an SDL, etc. 
 
 		if (isset($student_progress["current_positions_in_containers"][$active_container]))		// If this TT has a current position (i.e. is not complete) 
 		{	$position_array['levels_arr'] = explode("|", $student_progress["current_positions_in_containers"][$active_container]);	
@@ -44,6 +64,12 @@ while(1)
 		}	
 	}
 
+	if ($position_array["is_pool_container"])
+	{	echo "<hr>";
+		create_container_progress_record($position_array);
+		continue;
+	}	
+
 	while ($position_array['is_container'])
 	{	create_container_progress_record($position_array);
 		add_first_element($position_array);
@@ -56,13 +82,11 @@ while(1)
 
 	$count++;
 	if ($count == $max_ques) $exceptional_condition[$current_student_id] = "SESSION_END";
-
 }
 
 echo "<hr><xmp>FINAL";
 print_r($student_progress);
-print_r($position_array['levels_arr']);
-echo "curr_level = ".$position_array['curr_level'];
+print_r($position_array);
 echo "</xmp>";
 
 echo "Reached program end<br>";
@@ -70,16 +94,23 @@ echo "Reached program end<br>";
 ///////////////////////// FUNCTIONS ////////////////////////////
 
 function update_position_array(&$position_array)		// Should be called after any change to elements of $position_array so all elements can be updated. 
-{	global $student_progress; 							// Updates happen based on changes to 'level_arr' and 'curr_level' (not other values)
+{	global $student_progress, $container_array; 		// Updates happen based on changes to 'level_arr' and 'curr_level' (not other values)
 														// Also gets the appropriate keys ("student_progress_key", "trail_key" and "max_attempt_num" for any position
 	$position_array['trail_str'] = "";
 	$position_array["student_progress_key"] = $position_array["trail_key"] = $position_array["attempt_num"] = -1;		// Initialise some of the values
 
-
-
 	preg_match('/(.*)\((\d+)\)/', $position_array['levels_arr'][$position_array['curr_level']], $matches);
 	$position_array['container_id'] = isset($matches[1]) ? $matches[1] : $position_array['levels_arr'][$position_array['curr_level']];
-	if (get_container_key($position_array['container_id']) != -1) $position_array['is_container'] = 1; else $position_array['is_container'] = 0;
+	$container_key = get_container_key($position_array['container_id']);
+	
+	$position_array['is_container'] = 0;
+	if ($container_key != -1) 
+	{	$position_array['is_container'] = 1; 
+		if (isset($container_array[$container_key]['is_pool_container']))
+		{	$position_array['is_pool_container'] = $container_array[$container_key]['is_pool_container'];
+			$position_array['pool_qno'] = 0;
+		}	
+	}
 	for ($i=0; $i<$position_array['curr_level']; $i++) $position_array['trail_str'] .= $position_array['levels_arr'][$i]."|";
 	$position_array['trail_str'] = substr($position_array['trail_str'],0,-1);
 
@@ -135,22 +166,24 @@ function create_container_progress_record(&$position_array)		// Creates containe
 	{	update_student_progress($position_array, array("id" => $position_array['container_id'], "trails" => array()));
 		update_position_array($position_array);									// As the previous statement will cause a "student_progress_key to be set"
 		update_student_progress($position_array, array("trail_str" => $position_array['trail_str'], "failure_num" => 0, "attempts" => array()));
-		update_position_array($position_array);
+		update_position_array($position_array);									// As the previous statement updates attempt_num"
 		update_student_progress($position_array, $attempt_array);
-		update_position_array($position_array);
 	}
 
 	if ($position_array['trail_key'] == -1) 									// Container entry exists in $student_progress but this is a new trail (Top level containers have only 1 trail but a cluster, for example, can be in different TTs and be the current cluster in both)
 	{	update_student_progress($position_array, array("trail_str" => $position_array['trail_str'], "failure_num" => 0, "attempts" => array()));
 		update_position_array($position_array);
 		update_student_progress($position_array, $attempt_array);
-		update_position_array($position_array);
 	}	
 
 	if ($position_array['attempt_num'] == -1)									// Container and trail exist in $student_progress but this is a new attempt.
 	{	update_student_progress($position_array, $attempt_array);
-		update_position_array($position_array);
 	}
+
+	if ($position_array['is_pool_container'] == 1)
+	{	update_student_progress($position_array, array("is_pool_container" => 1));
+		$position_array['unattempted_pool_elements'] = $attempt_array["unattempted_elements"];
+	}	
 }
 
 function update_student_progress($position_array, $key_value_changes)
@@ -388,15 +421,15 @@ function update_student_progress_container_parameters(&$position_array, $element
 	eval(str_replace("#", "$", "global #container_array; #new_status = ".$container_array[$container_key]["status_criterion"]));	// Updated (parent) container status
 	$array_to_write['status'] = $new_status; 
 echo "Status of ".$position_array["container_id"]." = ".$new_status." | ";
-
+ 
 	// Update 'correct_in_sequence' and 'wrong_in_sequence' in $student_progress
 	if ($element_was_item)
 	{	if ($element_result == "SUCCESS")
-		{	$array_to_write['correct_in_sequence'] = $student_progress['correct_in_sequence']++;
+		{	$array_to_write['correct_in_sequence'] = $student_progress['correct_in_sequence'] + 1;
 			$array_to_write['wrong_in_sequence'] = 0;
 		} elseif ($element_result == "FAILURE")
 		{	$array_to_write['correct_in_sequence'] = 0;
-			$array_to_write['wrong_in_sequence'] = $student_progress['wrong_in_sequence']++;
+			$array_to_write['wrong_in_sequence'] = $student_progress['wrong_in_sequence'] + 1;
 		}	
 
 		// Update 'current_positions_in_containers' in $student_progress
@@ -407,13 +440,10 @@ echo "Status of ".$position_array["container_id"]." = ".$new_status." | ";
 
 	// Write the array
 	update_student_progress($position_array, $array_to_write);
-
-
 }
 
 function is_pool_container($position_array)
-{	global $container_array, $student_progress; 
-	$container_key = get_container_key($position_array['container_id']);
+{	global $container_array, $student_progress;	$container_key = get_container_key($position_array['container_id']);
 	if ((isset($container_array[$container_key]["is_pool_container"])) && ($container_array[$container_key]["is_pool_container"])) 
 		return true; 
 	else return false;
@@ -429,6 +459,29 @@ function handle_exceptional_condition($exceptional_code)
 function get_attempt_number($position_array)
 {	global $student_progress; 
 	return (($position_array['attempt_num'] == -1) ? 1 : $position_array['attempt_num']+1);				// if unattempted, return 1, else last attempt number + 1
+}
+
+function get_next_pool_element(&$position_array)
+{	$a = rand(1,100);
+	$element_result = ($a < 50) ? "SUCCESS" : (($a < 90) ? "FAILURE" : "SKIPPED");
+
+	$i = $position_array["pool_qno"];
+	if (isset($position_array["unattempted_pool_elements"][$i]))
+	{	echo "<span style='color:red'>".($i+1).". Asked item ".$position_array["unattempted_pool_elements"][$i]." and the result was... ".$element_result."</span><br>";
+		$position_array["attempted_pool_elements"][] = array($position_array["unattempted_pool_elements"][$i] => $element_result);
+		unset($position_array["unattempted_pool_elements"][$i]);
+		$position_array["pool_qno"] = ++$i;
+		return(true);
+	}
+	else return(false);
+}
+
+function record_pool_container_data(&$position_array)
+{	update_student_progress($position_array, array("attempted_elements" => $position_array["attempted_pool_elements"], "unattempted_elements" => array()));
+	unset($position_array["attempted_pool_elements"]);
+	unset($position_array["unattempted_pool_elements"]);
+	unset($position_array["pool_qno"]);
+	unset($position_array["is_pool_container"]);
 }
 
 ?>
