@@ -1,10 +1,10 @@
 <?php
 include './mindspark_content.php';
 
-echo "Usage: <span style='font-family:monospace;'>adaptive_logic.php?max_ques=15&logic=MS</span>&nbsp;&nbsp;|&nbsp;&nbsp;MS can be replaced by ASSET or DA.<hr>";
+echo "Usage: <span style='font-family:monospace;'>adaptive_logic.php?max_ques=15&logic=Mindspark</span>&nbsp;&nbsp;|&nbsp;&nbsp;Mindspark can be replaced by ASSET or DA.<hr>";
 
 $max_ques = (isset($_REQUEST['max_ques'])) ? $_REQUEST['max_ques'] : 17;
-$logic = (isset($_REQUEST['logic'])) ? $_REQUEST['logic'] : "MS";
+$logic = (isset($_REQUEST['logic'])) ? $_REQUEST['logic'] : "Mindspark";
 
 $current_student_id = 100;
 $position_array = array("levels_arr" => array(), "curr_level" => -1, "container_id" => "", "is_container" => 0, "student_progress_key" => -1, "trail_str" => "", "trail_key" => -1, "attempt_num" => -1, "is_pool_container" => 0);
@@ -37,18 +37,19 @@ while(1)
  
 	// No active container means for example that no Teacher Topic is currently active
 	if (!isset($student_progress["active_container"]) || ($student_progress["active_container"] == ""))
-	{	echo "Line 41 logic = ".$logic."<br>";
-		switch ($logic)
-		{	case "ASSET":	$active_container = "ASSET_19C";
+	{	switch (strtolower($logic))
+		{	case "asset":	$active_container = "ASSET_19C";
 							break;
 
-			case "DA":		$active_container = "DA_43449939887782021_2";
+			case "da":		$active_container = "DA_43449939887782021_2";
 							break;
 
-			default:		echo "<hr>(Temp) Max questions = ".$max_ques."<br>";
-							echo "Choose a TT (TT050, TT051, TT052)...<br>...Assuming TT050 chosen<hr>";
+			default:		$logic = "Mindspark";
+							$out = "<hr>(Temp) Max questions = ".$max_ques."<br>";
+							$out .= "Choose a TT (TT050, TT051, TT052)...<br>...Assuming TT050 chosen<hr>";
 							$active_container = "TT050";
 		}
+		echo "This is... ".$logic."<br>".$out;
 
 		$position_array['trail_str'] = "";		// trail_str will be "" for a teacher topic or assessment, something like "TT050(1)|FRA003(2)" for an SDL, etc. 
 

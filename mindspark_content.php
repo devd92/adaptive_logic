@@ -170,7 +170,7 @@ $container_array[] = array("type" => "SDL", // cluster, game, teacher topic, SDL
 			"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
 );
 
-$collection_array[] = array("type" => "ASSET_test", // cluster, game, teacher topic, SDL
+$container_array[] = array("type" => "ASSET_test", // cluster, game, teacher topic, SDL
 						"id" => "ASSET_19C",
 						"name" => "ASSET English Winter 2006",
 						"contents" => array(12775,12778,12779,12783,12784,12782,12781,13250,12871,12875,12876,12869,12868,12873,12874,12877,12872,12852,12855,12856,12854,12858,12861,12853,12851,12792,12793,12800,12788,12802,12795,12790,12823,12824,12862,12863,12864,12865,12866,12804,12816,12770,12765,12769,12773,12772,12768,12809,12803,13157,13158,12844,12846,12847,12848,13251,13188,13189,13190,13191,13192,13193,12813,12810,13249,12808,12805,12806,12807,12812),
@@ -180,7 +180,7 @@ $collection_array[] = array("type" => "ASSET_test", // cluster, game, teacher to
 						"is_pool_container" => 1
 );
 
-$collection_array[] = array("type" => "ASSET_test", // cluster, game, teacher topic, SDL
+$container_array[] = array("type" => "ASSET_test", // cluster, game, teacher topic, SDL
 						"id" => "ASSET_26J",
 						"name" => "ASSET Maths Summer 2010",
 						"contents" => array(22621,22824,22882,22874,20756,22838,20174,22869,22841,22828,22848,22817,22832,22842,22880,22847,22914,22846,22605,22870,22830,22837,22877,22881,22876,22826,22890,22891,22822,22819,22904,22818,22887,22840,18241,22909,22893,22835,22892,22894),
@@ -191,7 +191,7 @@ $collection_array[] = array("type" => "ASSET_test", // cluster, game, teacher to
 );
 
 
-$collection_array[] = array("type" => "test", // cluster, game, teacher topic, SDL
+$container_array[] = array("type" => "test", // cluster, game, teacher topic, SDL
 						"id" => "DA_43449939887782021_2",
 						"name" => "",
 						"contents" => array(72360,70765,12937,70810,70744,70838,70874,70718,70738,70830,70713,70742,70745,70741,70764,72304,72232,12939,70746),
@@ -201,7 +201,7 @@ $collection_array[] = array("type" => "test", // cluster, game, teacher topic, S
 						"is_pool_container" => 1
 );
 
-$collection_array[] = array("type" => "test", // cluster, game, teacher topic, SDL
+$container_array[] = array("type" => "test", // cluster, game, teacher topic, SDL
 						"id" => "DA_26449939887782305_4",
 						"name" => "",
 						"contents" => array(39990,66142,24024,59805,44006,50923,55878,65723,64109,45523,47727,32096,20234,41401,13512,20488,7597,24129,24123,40414,22966,43685,50859,28775,17356),
