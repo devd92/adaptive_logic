@@ -27,13 +27,28 @@ $result1 = mysqli_query($conn, $fetch_clusters);
 $container_array['id'] = array();
 $container_array['id']['contents'] = array();
 while($row = mysqli_fetch_assoc($result1)){
-echo '$container_array[] = array("type" => "Teacher Topic", // cluster, game, teacher topic, SDL<br>
-			"id" => "'.$row['TT'].'",<br>
-			"name" =>"'.$row['name'].'" ,<br>
-			"contents" => array('.$row['clusters'].'),<br>
-			"status_criterion" => "<to write as per comment>",	// if last_element completed, mark as COMPLETED, else IN_PROGRESS<br>
-			"start_with" => "FIRST_ELEMENT",			// FIRST_ELEMENT, RANDOM_FROM_UNATTEMPTED<br>
-			"movement_logic_within_container" => "if (active_element.result == "success") NEXT_IN_SEQUENCE; if ((active_element.result == \'failure\') && (active_element.failure_number == 1)) SAME_ELEMENT; if ((active_element.result == \'failure\') && (active_element.failure_number == 2)) PREVIOUS_ELEMENT; if ((active_element.result == \'failure\') && (active_element.failure_number == 3) && (exists(active_element.remedial_cluster)) call_element(active_element.remedial_cluster); if ((active_element.result == \'failure\') && (active_element.failure_number == 4) && (exists(active_element.remedial_element)) call_element(active_element.remedial_element);" // "USER_SELECTION" | (NEXT_IN_SEQUENCE | RANDOM_FROM_UNATTEMPTED | RANDOM_WITH_REPEAT | USER_SELECTION)<br><br>';
+	$clusters = explode(',', $row['clusters']);
+	echo '$container_array[] = array("type" => "Teacher Topic", // cluster, game, teacher topic, SDL<br>
+				"id" => "'.$row['TT'].'",<br>
+				"name" =>"'.$row['name'].'" ,<br>
+				"contents" => array(';
+	$cluster_output = '';
+	foreach($clusters as $key => $value){
+		$key +=1;
+	    $cluster_output = $cluster_output.$key."=>".$value.", ";
+	}
+	IF(substr($cluster_output,0,2) == ', ')
+		{
+			$cluster_output = ltrim($cluster_output, ', ');
+		}
+	WHILE(substr($cluster_output,-2) == ', ') {
+			$cluster_output = rtrim($cluster_output, ', ');
+		}
+	echo $cluster_output;
+	echo '),<br>
+				"status_criterion" => "<to write as per comment>",	// if last_element completed, mark as COMPLETED, else IN_PROGRESS<br>
+				"start_with" => "FIRST_ELEMENT",			// FIRST_ELEMENT, RANDOM_FROM_UNATTEMPTED<br>
+				"movement_logic_within_container" => "if (active_element.result == "success") NEXT_IN_SEQUENCE; if ((active_element.result == \'failure\') && (active_element.failure_number == 1)) SAME_ELEMENT; if ((active_element.result == \'failure\') && (active_element.failure_number == 2)) PREVIOUS_ELEMENT; if ((active_element.result == \'failure\') && (active_element.failure_number == 3) && (exists(active_element.remedial_cluster)) call_element(active_element.remedial_cluster); if ((active_element.result == \'failure\') && (active_element.failure_number == 4) && (exists(active_element.remedial_element)) call_element(active_element.remedial_element);" // "USER_SELECTION" | (NEXT_IN_SEQUENCE | RANDOM_FROM_UNATTEMPTED | RANDOM_WITH_REPEAT | USER_SELECTION)<br><br>';
 }
 
 echo "<br>//Now the clusters<br>";
@@ -47,10 +62,25 @@ $fetch_SDLs = "SELECT cm.cluster as 'name',  q.clusterCode as 'cluster',group_co
 
 $result2 = mysqli_query($conn, $fetch_SDLs);
 while($row = mysqli_fetch_assoc($result2)){
-echo '$container_array[] = array("type" => "cluster", 
+	$SDLs = explode(',',$row['SDL']);
+	echo '$container_array[] = array("type" => "cluster", 
 			"id" => "'.$row['cluster'].'",<br>
 			"name" => "'.$row['name'].'",<br>
-			"contents" => array('.$row['SDL'].'),<br>
+			"contents" => array(';
+	$SDL_output = '';
+	foreach($SDLs as $key => $value){
+		$key +=1;
+	    $SDL_output = $SDL_output.$key."=>".$value.", ";
+	}
+	IF(substr($SDL_output,0,2) == ', ')
+		{
+			$SDL_output = ltrim($SDL_output, ', ');
+		}
+	WHILE(substr($SDL_output,-2) == ', ') {
+			$SDL_output = rtrim($SDL_output, ', ');
+		}
+	echo $SDL_output;
+	echo '),<br>
 			"remedial_action1" => "RFRA001",<br>
 			"remedial_action2" => "",		<br>	
 			"status_criterion" => "(#student[\'element_performance\'][\'FAILURE\'] / #student[\'element_performance\'][\'TOTAL\'] > (1 - (#container_array[#container_key][\'success_percent\']))) ? \'FAILURE\' : ((count(#student[\'unattempted_elements\'])==0) ? \'SUCCESS\' : \'IN_PROGRESS\');",

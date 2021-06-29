@@ -7,6 +7,14 @@ $CLUSTER_SUCCESS_PERcEnT = 80;
 
 $container_array = array();
 
+<<<<<<< HEAD
+$container_array[] = array("type" => "Teacher Topic", 
+			"id" => "TT050",
+			"name" => "Fractions - Basic Concepts", 
+			"contents" => array(1=>"FRA003", 2=>"FRA004", 3=>"FRA005", 4=>"FRA006", 5=>"FRA007", 6=>"FRA008", 7=>"FRA009", 8=>"FRA010", 9=>"FRA011", 10=>"FRA012", 11=>"FRA013", 12=>"FRA014", 13=>"FRA018", 14=>"FRA032", 15=>"FRA035", 16=>"REA016", 17=>"REA036", 18=>"REA062"),
+			"status_criterion" => "(#student['last_element_status'] != 'IN_PROGRESS') ? 'COMPLETED' : 'IN_PROGRESS';",	// if last_element completed, mark as COMPLETED, else IN_PROGRESS
+			"movement_logic_within_container" => "((#student['last_element_status'] == 'SUCCESS') || (#student['status'] == 'NOT_STARTED')) ? 'NEXT_IN_SEQUENCE' : (((#student['last_element_status'] == 'FAILURE') && (#student['curr_failure_num'] == 1)) ? 'REPEAT_ELEMENT' : 'PREVIOUS_ELEMENT');" //		 ((#student['last_element_status'] == 'failure') && (active_element.failure_number == 2)) PREVIOUS_ELEMENT; if ((#student['last_element_status'] == 'failure') && (active_element.failure_number == 3) && (exists(active_element.remedial_cluster)) call_element(active_element.remedial_cluster); if ((#student['last_element_status'] == 'failure') && (active_element.failure_number == 4) && (exists(active_element.remedial_element)) call_element(active_element.remedial_element); // "USER_SELECTION" | (NEXT_IN_SEQUENCE | RANDOM_FROM_UNATTEMPTED | RANDOM_WITH_REPEAT | USER_SELECTION)
+=======
 // So we have to define active_element.id, active_element.result, active_element.failure_number, active_element.remedial_cluster, active_element.remedial_element, SAME_ELEMENT, PREVIOUS_ELEMENT, NEXT_IN_SEQUENCE, is_last_element_completed(), exists(), call_element(), is_cluster_passed(), last_element_status() 
 
 
@@ -119,6 +127,7 @@ $container_array[] = array("type" => "cluster", "id" => "FRA013",
 "status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", "start_with" => "FIRST_ELEMENT",
 "success_percent" => 0.8,
 "movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+>>>>>>> 4dbfc2693f0b21ae7b08b4f9ef22a17e69cadc10
 
 $container_array[] = array("type" => "cluster", "id" => "FRA014",
 "name" => "Estimating the value of fractional numbers",
@@ -2200,24 +2209,43 @@ $container_array[] = array("type" => "SDL",
 "start_with" => "RANDOM_FROM_UNATTEMPTED",
 "movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
 
+<<<<<<< HEAD
+//Now the clusters
+$container_array[] = array("type" => "cluster", "id" => "FRA003",
+"name" => "Working with unit fractions",
+"contents" => array(1=>"FRA003_SDL_1.0", 2=>"FRA003_SDL_2.0", 3=>"FRA003_SDL_3.0", 4=>"FRA003_SDL_4.0", 5=>"FRA003_SDL_5.0", 6=>"FRA003_SDL_6.0", 7=>"FRA003_SDL_7.0", 8=>"FRA003_SDL_8.0", 9=>"FRA003_SDL_9.0", 10=>"FRA003_SDL_10.0", 11=>"FRA003_SDL_11.0", 12=>"FRA003_SDL_12.0", 13=>"FRA003_SDL_13.0", 14=>"FRA003_SDL_14.0", 15=>"FRA003_SDL_15.0", 16=>"FRA003_SDL_16.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA004",
+"name" => "Understanding fractions as part of a collection",
+"contents" => array(1=>"FRA004_SDL_1.0", 2=>"FRA004_SDL_2.0", 3=>"FRA004_SDL_3.0", 4=>"FRA004_SDL_4.0", 5=>"FRA004_SDL_5.0", 6=>"FRA004_SDL_6.0", 7=>"FRA004_SDL_7.0", 8=>"FRA004_SDL_8.0", 9=>"FRA004_SDL_9.0", 10=>"FRA004_SDL_10.0", 11=>"FRA004_SDL_11.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "ASSET_test", // cluster, game, teacher topic, SDL
+=======
 $collection_array[] = array("type" => "ASSET_test", // cluster, game, teacher topic, SDL
+>>>>>>> 4dbfc2693f0b21ae7b08b4f9ef22a17e69cadc10
 						"id" => "ASSET_19C",
 						"name" => "ASSET English Winter 2006",
 						"contents" => array(12775,12778,12779,12783,12784,12782,12781,13250,12871,12875,12876,12869,12868,12873,12874,12877,12872,12852,12855,12856,12854,12858,12861,12853,12851,12792,12793,12800,12788,12802,12795,12790,12823,12824,12862,12863,12864,12865,12866,12804,12816,12770,12765,12769,12773,12772,12768,12809,12803,13157,13158,12844,12846,12847,12848,13251,13188,13189,13190,13191,13192,13193,12813,12810,13249,12808,12805,12806,12807,12812),
-						"success_criterion" => "is_last_element_completed()",
-						"start_with" => "FIRST_ELEMENT",
-						"movement_logic" => "NEXT_IN_SEQUENCE",
-						"is_pool_container" => 1
+						"is_pool_container" => 1,
+						"max_mins_allowed" => "60"
 );
 
 $collection_array[] = array("type" => "ASSET_test", // cluster, game, teacher topic, SDL
 						"id" => "ASSET_26J",
 						"name" => "ASSET Maths Summer 2010",
 						"contents" => array(22621,22824,22882,22874,20756,22838,20174,22869,22841,22828,22848,22817,22832,22842,22880,22847,22914,22846,22605,22870,22830,22837,22877,22881,22876,22826,22890,22891,22822,22819,22904,22818,22887,22840,18241,22909,22893,22835,22892,22894),
-						"success_criterion" => "is_last_element_completed()",
-						"start_with" => "FIRST_ELEMENT",
-						"movement_logic" => "NEXT_IN_SEQUENCE",
-						"is_pool_container" => 1
+						"is_pool_container" => 1,
+						"max_mins_allowed" => "45"
 );
 
 
@@ -2225,20 +2253,1956 @@ $collection_array[] = array("type" => "test", // cluster, game, teacher topic, S
 						"id" => "DA_43449939887782021_2",
 						"name" => "",
 						"contents" => array(72360,70765,12937,70810,70744,70838,70874,70718,70738,70830,70713,70742,70745,70741,70764,72304,72232,12939,70746),
-						"success_criterion" => "is_last_element_completed()",
-						"start_with" => "FIRST_ELEMENT",
-						"movement_logic" => "UNATTEMPTED_ELEMENT",
-						"is_pool_container" => 1
+						"is_pool_container" => 1,
+						"max_mins_allowed" => "25"
 );
 
 $collection_array[] = array("type" => "test", // cluster, game, teacher topic, SDL
 						"id" => "DA_26449939887782305_4",
 						"name" => "",
 						"contents" => array(39990,66142,24024,59805,44006,50923,55878,65723,64109,45523,47727,32096,20234,41401,13512,20488,7597,24129,24123,40414,22966,43685,50859,28775,17356),
-						"success_criterion" => "is_last_element_completed()",
-						"start_with" => "FIRST_ELEMENT",
-						"movement_logic" => "UNATTEMPTED_ELEMENT",
-						"is_pool_container" => 1
+						"is_pool_container" => 1,
+						"max_mins_allowed" => "30"
 );
+
+
+$container_array[] = array("type" => "cluster", "id" => "FRA005",
+"name" => "Problems based on basic fraction concepts",
+"contents" => array(1=>"FRA005_SDL_1.0", 2=>"FRA005_SDL_1.1", 3=>"FRA005_SDL_2.0", 4=>"FRA005_SDL_3.0", 5=>"FRA005_SDL_4.0", 6=>"FRA005_SDL_5.0", 7=>"FRA005_SDL_6.0", 8=>"FRA005_SDL_7.0", 9=>"FRA005_SDL_8.0", 10=>"FRA005_SDL_9.0", 11=>"FRA005_SDL_10.0", 12=>"FRA005_SDL_11.0", 13=>"FRA005_SDL_11.5", 14=>"FRA005_SDL_12.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA006",
+"name" => "Understanding mixed numbers",
+"contents" => array(1=>"FRA006_SDL_1.0", 2=>"FRA006_SDL_2.0", 3=>"FRA006_SDL_2.5", 4=>"FRA006_SDL_3.0", 5=>"FRA006_SDL_4.0", 6=>"FRA006_SDL_5.0", 7=>"FRA006_SDL_6.0", 8=>"FRA006_SDL_6.1", 9=>"FRA006_SDL_7.0", 10=>"FRA006_SDL_8.0", 11=>"FRA006_SDL_9.0", 12=>"FRA006_SDL_10.0", 13=>"FRA006_SDL_11.0", 14=>"FRA006_SDL_12.0", 15=>"FRA006_SDL_13.0", 16=>"FRA006_SDL_14.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA007",
+"name" => "Understanding improper fractions",
+"contents" => array(1=>"FRA007_SDL_0.5", 2=>"FRA007_SDL_1.0", 3=>"FRA007_SDL_2.0", 4=>"FRA007_SDL_3.0", 5=>"FRA007_SDL_4.0", 6=>"FRA007_SDL_6.0", 7=>"FRA007_SDL_6.5", 8=>"FRA007_SDL_6.7", 9=>"FRA007_SDL_7.0", 10=>"FRA007_SDL_8.0", 11=>"FRA007_SDL_9.0", 12=>"FRA007_SDL_10.0", 13=>"FRA007_SDL_11.0", 14=>"FRA007_SDL_12.0", 15=>"FRA007_SDL_13.0", 16=>"FRA007_SDL_14.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA008",
+"name" => "Writing mixed numbers as improper fractions and vice versa",
+"contents" => array(1=>"FRA008_SDL_1.0", 2=>"FRA008_SDL_2.0", 3=>"FRA008_SDL_3.0", 4=>"FRA008_SDL_5.0", 5=>"FRA008_SDL_6.0", 6=>"FRA008_SDL_7.0", 7=>"FRA008_SDL_10.0", 8=>"FRA008_SDL_11.0", 9=>"FRA008_SDL_12.0", 10=>"FRA008_SDL_13.0", 11=>"FRA008_SDL_14.0", 12=>"FRA008_SDL_16.0", 13=>"FRA008_SDL_17.0", 14=>"FRA008_SDL_18.0", 15=>"FRA008_SDL_19.0", 16=>"FRA008_SDL_19.5", 17=>"FRA008_SDL_20.0", 18=>"FRA008_SDL_20.5"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA009",
+"name" => "Introduction to addition and subtraction of fractions (proper and mixed fractions)",
+"contents" => array(1=>"FRA009_SDL_1.0", 2=>"FRA009_SDL_2.0", 3=>"FRA009_SDL_3.0", 4=>"FRA009_SDL_4.0", 5=>"FRA009_SDL_5.0", 6=>"FRA009_SDL_6.0", 7=>"FRA009_SDL_7.0", 8=>"FRA009_SDL_8.0", 9=>"FRA009_SDL_9.0", 10=>"FRA009_SDL_10.0", 11=>"FRA009_SDL_11.0", 12=>"FRA009_SDL_12.0", 13=>"FRA009_SDL_13.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA010",
+"name" => "Understanding equivalence of fractions",
+"contents" => array(1=>"FRA010_SDL_1.0", 2=>"FRA010_SDL_1.5", 3=>"FRA010_SDL_2.0", 4=>"FRA010_SDL_3.0", 5=>"FRA010_SDL_4.0", 6=>"FRA010_SDL_5.0", 7=>"FRA010_SDL_6.0", 8=>"FRA010_SDL_7.0", 9=>"FRA010_SDL_8.0", 10=>"FRA010_SDL_9.0", 11=>"FRA010_SDL_10.0", 12=>"FRA010_SDL_11.0", 13=>"FRA010_SDL_12.0", 14=>"FRA010_SDL_13.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA011",
+"name" => "Finding equivalent fractions, and reducing fractions",
+"contents" => array(1=>"FRA011_SDL_1.0", 2=>"FRA011_SDL_2.0", 3=>"FRA011_SDL_3.0", 4=>"FRA011_SDL_4.0", 5=>"FRA011_SDL_5.0", 6=>"FRA011_SDL_6.0", 7=>"FRA011_SDL_7.0", 8=>"FRA011_SDL_8.0", 9=>"FRA011_SDL_8.5", 10=>"FRA011_SDL_8.7", 11=>"FRA011_SDL_9.0", 12=>"FRA011_SDL_10.0", 13=>"FRA011_SDL_12.0", 14=>"FRA011_SDL_13.0", 15=>"FRA011_SDL_14.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA012",
+"name" => "Understanding fractions on the number line",
+"contents" => array(1=>"FRA012_SDL_1.0", 2=>"FRA012_SDL_2.0", 3=>"FRA012_SDL_3.0", 4=>"FRA012_SDL_4.0", 5=>"FRA012_SDL_5.0", 6=>"FRA012_SDL_6.0", 7=>"FRA012_SDL_7.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA013",
+"name" => "Introduction to comparison of fractions",
+"contents" => array(1=>"FRA013_SDL_1.0", 2=>"FRA013_SDL_2.0", 3=>"FRA013_SDL_3.0", 4=>"FRA013_SDL_4.0", 5=>"FRA013_SDL_5.0", 6=>"FRA013_SDL_6.0", 7=>"FRA013_SDL_7.0", 8=>"FRA013_SDL_9.0", 9=>"FRA013_SDL_9.1", 10=>"FRA013_SDL_9.2", 11=>"FRA013_SDL_10.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA014",
+"name" => "Estimating the value of fractional numbers",
+"contents" => array(1=>"FRA014_SDL_1.0", 2=>"FRA014_SDL_2.0", 3=>"FRA014_SDL_3.0", 4=>"FRA014_SDL_4.0", 5=>"FRA014_SDL_5.0", 6=>"FRA014_SDL_6.0", 7=>"FRA014_SDL_7.0", 8=>"FRA014_SDL_8.0", 9=>"FRA014_SDL_9.0", 10=>"FRA014_SDL_10.0", 11=>"FRA014_SDL_11.0", 12=>"FRA014_SDL_13.0", 13=>"FRA014_SDL_14.0", 14=>"FRA014_SDL_15.0", 15=>"FRA014_SDL_16.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA018",
+"name" => "Fractions as a notation of division",
+"contents" => array(1=>"FRA018_SDL_0.5", 2=>"FRA018_SDL_0.8", 3=>"FRA018_SDL_1.0", 4=>"FRA018_SDL_2.0", 5=>"FRA018_SDL_3.0", 6=>"FRA018_SDL_6.5", 7=>"FRA018_SDL_6.6", 8=>"FRA018_SDL_6.8", 9=>"FRA018_SDL_7.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA032",
+"name" => "Express equivalent fractions with base 10 and base 100",
+"contents" => array(1=>"FRA032_SDL_1.0", 2=>"FRA032_SDL_2.0", 3=>"FRA032_SDL_3.0", 4=>"FRA032_SDL_4.0", 5=>"FRA032_SDL_5.0", 6=>"FRA032_SDL_6.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "FRA035",
+"name" => "Equal shares of identical wholes need not have the same shape",
+"contents" => array(1=>"FRA035_SDL_2.0", 2=>"FRA035_SDL_3.0", 3=>"FRA035_SDL_4.0", 4=>"FRA035_SDL_5.0", 5=>"FRA035_SDL_6.0", 6=>"FRA035_SDL_7.0", 7=>"FRA035_SDL_8.0", 8=>"FRA035_SDL_9.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "REA016",
+"name" => "Comparing fractions by finding common denominator",
+"contents" => array(1=>"REA016_SDL_1.0", 2=>"REA016_SDL_2.0", 3=>"REA016_SDL_3.0", 4=>"REA016_SDL_4.0", 5=>"REA016_SDL_5.0", 6=>"REA016_SDL_6.0", 7=>"REA016_SDL_7.0", 8=>"REA016_SDL_8.0", 9=>"REA016_SDL_9.0", 10=>"REA016_SDL_11.0", 11=>"REA016_SDL_13.0", 12=>"REA016_SDL_13.5", 13=>"REA016_SDL_14.0", 14=>"REA016_SDL_15.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "REA036",
+"name" => "Comparison of proper fractions by generating equivalent fractions on the number line",
+"contents" => array(1=>"REA036_SDL_1.0", 2=>"REA036_SDL_2.0", 3=>"REA036_SDL_3.0", 4=>"REA036_SDL_4.0", 5=>"REA036_SDL_5.0", 6=>"REA036_SDL_6.0", 7=>"REA036_SDL_7.0", 8=>"REA036_SDL_8.0", 9=>"REA036_SDL_8.5", 10=>"REA036_SDL_9.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+$container_array[] = array("type" => "cluster", "id" => "REA062",
+"name" => "Comparison of mixed fractions and improper fractions",
+"contents" => array(1=>"REA062_SDL_8.5", 2=>"REA062_SDL_10.0", 3=>"REA062_SDL_12.0", 4=>"REA062_SDL_13.0", 5=>"REA062_SDL_14.0", 6=>"REA062_SDL_15.0", 7=>"REA062_SDL_16.0", 8=>"REA062_SDL_16.2", 9=>"REA062_SDL_16.4", 10=>"REA062_SDL_16.6", 11=>"REA062_SDL_17.0"),
+"remedial_action1" => "RFRA001",
+"remedial_action2" => "",
+"status_criterion" => "(#student['element_performance']['FAILURE'] / #student['element_performance']['TOTAL'] > (1 - (#container_array[#container_key]['success_percent']))) ? 'FAILURE' : ((count(#student['unattempted_elements'])==0) ? 'SUCCESS' : 'IN_PROGRESS');", 
+"success_percent" => 0.8,
+"movement_logic_within_container" => "'NEXT_IN_SEQUENCE';" );
+
+
+//Now the SDLs
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_1.0",
+"name" => "FRA003_SDL_1.0",
+"contents" => array(7002,7037,7040),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_10.0",
+"name" => "FRA003_SDL_10.0",
+"contents" => array(54164,7053,7094,7096,54163),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_11.0",
+"name" => "FRA003_SDL_11.0",
+"contents" => array(7029,7098,7101,54165,54166),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_12.0",
+"name" => "FRA003_SDL_12.0",
+"contents" => array(7105,54167,54168,7031,7104),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_13.0",
+"name" => "FRA003_SDL_13.0",
+"contents" => array(7059,7106,7107),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_14.0",
+"name" => "FRA003_SDL_14.0",
+"contents" => array(7109,7060,7108),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_15.0",
+"name" => "FRA003_SDL_15.0",
+"contents" => array(7056,7110,7111),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_16.0",
+"name" => "FRA003_SDL_16.0",
+"contents" => array(54170,7061,7112,7113,54169),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_2.0",
+"name" => "FRA003_SDL_2.0",
+"contents" => array(7001,7043,7044),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_3.0",
+"name" => "FRA003_SDL_3.0",
+"contents" => array(7046,7028,7045),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_4.0",
+"name" => "FRA003_SDL_4.0",
+"contents" => array(7027,7048,7049),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_5.0",
+"name" => "FRA003_SDL_5.0",
+"contents" => array(54148,75594,7033,7055,7058,54141),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_6.0",
+"name" => "FRA003_SDL_6.0",
+"contents" => array(7034,7064,7065,54151,54154),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_7.0",
+"name" => "FRA003_SDL_7.0",
+"contents" => array(7085,7086,54156,54158,7041),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_8.0",
+"name" => "FRA003_SDL_8.0",
+"contents" => array(7039,7087,7088),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA003_SDL_9.0",
+"name" => "FRA003_SDL_9.0",
+"contents" => array(7089,7090,54160,54161,7036),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_1.0",
+"name" => "FRA004_SDL_1.0",
+"contents" => array(7015,7062,7092),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_10.0",
+"name" => "FRA004_SDL_10.0",
+"contents" => array(7592,7673,7674),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_11.0",
+"name" => "FRA004_SDL_11.0",
+"contents" => array(7675,7676,54311,79949,7593),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_2.0",
+"name" => "FRA004_SDL_2.0",
+"contents" => array(7063,7093,7124),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_3.0",
+"name" => "FRA004_SDL_3.0",
+"contents" => array(7133,7136,54216,7100),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_4.0",
+"name" => "FRA004_SDL_4.0",
+"contents" => array(78278,7103,7137,7142,54218,54219),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_5.0",
+"name" => "FRA004_SDL_5.0",
+"contents" => array(7102,7146,7147,54224,79933,79934,80722),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_6.0",
+"name" => "FRA004_SDL_6.0",
+"contents" => array(7095,7161,7162,54225),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_7.0",
+"name" => "FRA004_SDL_7.0",
+"contents" => array(7609,7659,7663,54290),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_8.0",
+"name" => "FRA004_SDL_8.0",
+"contents" => array(7590,7664,7667,54301,54303,54305),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA004_SDL_9.0",
+"name" => "FRA004_SDL_9.0",
+"contents" => array(7671,7672,54307,54308,7591,7670),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_1.0",
+"name" => "FRA005_SDL_1.0",
+"contents" => array(54314,54315,81368,7952,8093,8094,54313),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_1.1",
+"name" => "FRA005_SDL_1.1",
+"contents" => array(7946,7948,7958),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_10.0",
+"name" => "FRA005_SDL_10.0",
+"contents" => array(7966,8097,8098),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_11.0",
+"name" => "FRA005_SDL_11.0",
+"contents" => array(7967,8099,8100),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_11.5",
+"name" => "FRA005_SDL_11.5",
+"contents" => array(11746,11801,54367,11672),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_12.0",
+"name" => "FRA005_SDL_12.0",
+"contents" => array(7969,8101,8102),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_2.0",
+"name" => "FRA005_SDL_2.0",
+"contents" => array(8041,54317,54318,78541,81367,7959,8040),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_3.0",
+"name" => "FRA005_SDL_3.0",
+"contents" => array(54320,54322,54334,7961,8044,8046),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_4.0",
+"name" => "FRA005_SDL_4.0",
+"contents" => array(7962,8048,8050,54335,54337),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_5.0",
+"name" => "FRA005_SDL_5.0",
+"contents" => array(7963,8052,8054,54341,54347,54350),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_6.0",
+"name" => "FRA005_SDL_6.0",
+"contents" => array(8057,54353,54358,54359,78691,7964,8056),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_7.0",
+"name" => "FRA005_SDL_7.0",
+"contents" => array(7965,8103,8104),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_8.0",
+"name" => "FRA005_SDL_8.0",
+"contents" => array(8105,8106,8107,54361,54362,54365),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA005_SDL_9.0",
+"name" => "FRA005_SDL_9.0",
+"contents" => array(8096,7968,8095),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_1.0",
+"name" => "FRA006_SDL_1.0",
+"contents" => array(7192,54412,7152,7186),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_10.0",
+"name" => "FRA006_SDL_10.0",
+"contents" => array(7191,7233,7234,54404),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_11.0",
+"name" => "FRA006_SDL_11.0",
+"contents" => array(7188,7235,7236),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_12.0",
+"name" => "FRA006_SDL_12.0",
+"contents" => array(7211,7237,7239),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_13.0",
+"name" => "FRA006_SDL_13.0",
+"contents" => array(54408,7645,7654,7655,54405,54406),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_14.0",
+"name" => "FRA006_SDL_14.0",
+"contents" => array(7312,7647,7652),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_2.0",
+"name" => "FRA006_SDL_2.0",
+"contents" => array(7153,7196,7206,73668),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_2.5",
+"name" => "FRA006_SDL_2.5",
+"contents" => array(54378,54372,54373),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_3.0",
+"name" => "FRA006_SDL_3.0",
+"contents" => array(7154,7208,7210,54413),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_4.0",
+"name" => "FRA006_SDL_4.0",
+"contents" => array(7155,7216,7218),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_5.0",
+"name" => "FRA006_SDL_5.0",
+"contents" => array(7176,7222,7224,54380,54385,54389),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_6.0",
+"name" => "FRA006_SDL_6.0",
+"contents" => array(7226,54393,54395,7177,7225),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_6.1",
+"name" => "FRA006_SDL_6.1",
+"contents" => array(8087,8088,8089),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_7.0",
+"name" => "FRA006_SDL_7.0",
+"contents" => array(7228,7182,7227),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_8.0",
+"name" => "FRA006_SDL_8.0",
+"contents" => array(7180,7229,7230,54401,54403),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA006_SDL_9.0",
+"name" => "FRA006_SDL_9.0",
+"contents" => array(7232,7183,7231),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_0.5",
+"name" => "FRA007_SDL_0.5",
+"contents" => array(7248,7678,7679,54446),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_1.0",
+"name" => "FRA007_SDL_1.0",
+"contents" => array(7240,7680,7681,54447),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_10.0",
+"name" => "FRA007_SDL_10.0",
+"contents" => array(7246,7730,7731,54463,54466,54469,80581),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_11.0",
+"name" => "FRA007_SDL_11.0",
+"contents" => array(7732,7733,7282),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_12.0",
+"name" => "FRA007_SDL_12.0",
+"contents" => array(7283,7734,7735),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_13.0",
+"name" => "FRA007_SDL_13.0",
+"contents" => array(7286,7736,7737),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_14.0",
+"name" => "FRA007_SDL_14.0",
+"contents" => array(7658,64918,64919),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_2.0",
+"name" => "FRA007_SDL_2.0",
+"contents" => array(54452,54453,81369,7247,7682,7683,54451),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_3.0",
+"name" => "FRA007_SDL_3.0",
+"contents" => array(7251,7684,7685),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_4.0",
+"name" => "FRA007_SDL_4.0",
+"contents" => array(7688,7250,7686),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_6.0",
+"name" => "FRA007_SDL_6.0",
+"contents" => array(7249,7694,7695,54455),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_6.5",
+"name" => "FRA007_SDL_6.5",
+"contents" => array(7275,7696,7719),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_6.7",
+"name" => "FRA007_SDL_6.7",
+"contents" => array(7677,7720,7721),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_7.0",
+"name" => "FRA007_SDL_7.0",
+"contents" => array(7242,7724,7725,54458),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_8.0",
+"name" => "FRA007_SDL_8.0",
+"contents" => array(7723,7726,7244),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA007_SDL_9.0",
+"name" => "FRA007_SDL_9.0",
+"contents" => array(7245,7728,7729,54459,54460,54461),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_1.0",
+"name" => "FRA008_SDL_1.0",
+"contents" => array(7975,8007,8008),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_10.0",
+"name" => "FRA008_SDL_10.0",
+"contents" => array(7984,8017,8018),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_11.0",
+"name" => "FRA008_SDL_11.0",
+"contents" => array(7986,8019,8020),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_12.0",
+"name" => "FRA008_SDL_12.0",
+"contents" => array(7982,8021,8024),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_13.0",
+"name" => "FRA008_SDL_13.0",
+"contents" => array(8026,7988,8025),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_14.0",
+"name" => "FRA008_SDL_14.0",
+"contents" => array(7990,8027,8028),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_16.0",
+"name" => "FRA008_SDL_16.0",
+"contents" => array(7993,8029,8030),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_17.0",
+"name" => "FRA008_SDL_17.0",
+"contents" => array(8031,8032,7994),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_18.0",
+"name" => "FRA008_SDL_18.0",
+"contents" => array(62982,62983,62984),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_19.0",
+"name" => "FRA008_SDL_19.0",
+"contents" => array(70852),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_19.5",
+"name" => "FRA008_SDL_19.5",
+"contents" => array(70853),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_2.0",
+"name" => "FRA008_SDL_2.0",
+"contents" => array(8010,7973,8009),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_20.0",
+"name" => "FRA008_SDL_20.0",
+"contents" => array(70854),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_20.5",
+"name" => "FRA008_SDL_20.5",
+"contents" => array(70855),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_3.0",
+"name" => "FRA008_SDL_3.0",
+"contents" => array(7976,8022,8023),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_5.0",
+"name" => "FRA008_SDL_5.0",
+"contents" => array(7978,8011,8012),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_6.0",
+"name" => "FRA008_SDL_6.0",
+"contents" => array(8013,8014,7979),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA008_SDL_7.0",
+"name" => "FRA008_SDL_7.0",
+"contents" => array(7981,8015,8016),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_1.0",
+"name" => "FRA009_SDL_1.0",
+"contents" => array(7315,7317,7744,54472,54473),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_10.0",
+"name" => "FRA009_SDL_10.0",
+"contents" => array(78287,7342,7343,7344,54516,54517),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_11.0",
+"name" => "FRA009_SDL_11.0",
+"contents" => array(7345,7346,7798,54519,54520,81142,98551),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_12.0",
+"name" => "FRA009_SDL_12.0",
+"contents" => array(7347,7799,7800,54521,54523),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_13.0",
+"name" => "FRA009_SDL_13.0",
+"contents" => array(54524,54525,54527,7348,7801,7802),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_2.0",
+"name" => "FRA009_SDL_2.0",
+"contents" => array(7758,54474,78280,7319,7749),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_3.0",
+"name" => "FRA009_SDL_3.0",
+"contents" => array(54478,78281,78282,7320,79777,7759,7762,54476,54477),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_4.0",
+"name" => "FRA009_SDL_4.0",
+"contents" => array(54483,98702,54484,98760,79722,79723,7321,81496,7766,98456,7767,98566,54481,98701),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_5.0",
+"name" => "FRA009_SDL_5.0",
+"contents" => array(79798,79903,7322,80611,7323,81193,7770,98550,54486,54488,54506),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_6.0",
+"name" => "FRA009_SDL_6.0",
+"contents" => array(54489,54491,54492,78284,78285,7324,7325,7773),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_7.0",
+"name" => "FRA009_SDL_7.0",
+"contents" => array(54494,54496,54497,7326,7792,7793),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_8.0",
+"name" => "FRA009_SDL_8.0",
+"contents" => array(54502,80614,81143,7330,7794,7795,54498,54501),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA009_SDL_9.0",
+"name" => "FRA009_SDL_9.0",
+"contents" => array(54515,79790,79889,7341,7796,7797,54503,54510),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_1.0",
+"name" => "FRA010_SDL_1.0",
+"contents" => array(54617,7372,7380,7381,54609,54615),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_1.5",
+"name" => "FRA010_SDL_1.5",
+"contents" => array(74817),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_10.0",
+"name" => "FRA010_SDL_10.0",
+"contents" => array(7392,7594,7595,54650,54651,54652),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_11.0",
+"name" => "FRA010_SDL_11.0",
+"contents" => array(76690,76691,76692),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_12.0",
+"name" => "FRA010_SDL_12.0",
+"contents" => array(76693,76694,76695),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_13.0",
+"name" => "FRA010_SDL_13.0",
+"contents" => array(76698,76696,76697),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_2.0",
+"name" => "FRA010_SDL_2.0",
+"contents" => array(7382,7384,7387,54619,54620),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_3.0",
+"name" => "FRA010_SDL_3.0",
+"contents" => array(7389,7391,54621,54626,7375),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_4.0",
+"name" => "FRA010_SDL_4.0",
+"contents" => array(7376,7395,7396,54630),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_5.0",
+"name" => "FRA010_SDL_5.0",
+"contents" => array(7377,7397,7803,54632,54634,54635),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_6.0",
+"name" => "FRA010_SDL_6.0",
+"contents" => array(7412,7383,7411),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_7.0",
+"name" => "FRA010_SDL_7.0",
+"contents" => array(7385,7413,7414,54638,54640),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_8.0",
+"name" => "FRA010_SDL_8.0",
+"contents" => array(7599,54642,54645,54646,7388,7425),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA010_SDL_9.0",
+"name" => "FRA010_SDL_9.0",
+"contents" => array(54648,54649,7394,7596,7597,54647),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_1.0",
+"name" => "FRA011_SDL_1.0",
+"contents" => array(7440,7838,7840),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_10.0",
+"name" => "FRA011_SDL_10.0",
+"contents" => array(7460,7866,7867),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_12.0",
+"name" => "FRA011_SDL_12.0",
+"contents" => array(7834,7868,7869),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_13.0",
+"name" => "FRA011_SDL_13.0",
+"contents" => array(63764,63765,63766),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_14.0",
+"name" => "FRA011_SDL_14.0",
+"contents" => array(70621),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_2.0",
+"name" => "FRA011_SDL_2.0",
+"contents" => array(7443,7843,7844),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_3.0",
+"name" => "FRA011_SDL_3.0",
+"contents" => array(7845,7846,7445),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_4.0",
+"name" => "FRA011_SDL_4.0",
+"contents" => array(7446,7848,7849),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_5.0",
+"name" => "FRA011_SDL_5.0",
+"contents" => array(7448,7852,7853),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_6.0",
+"name" => "FRA011_SDL_6.0",
+"contents" => array(7450,7854,7855),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_7.0",
+"name" => "FRA011_SDL_7.0",
+"contents" => array(7451,7856,7857),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_8.0",
+"name" => "FRA011_SDL_8.0",
+"contents" => array(7859,7454,7858),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_8.5",
+"name" => "FRA011_SDL_8.5",
+"contents" => array(7832,7860,7861),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_8.7",
+"name" => "FRA011_SDL_8.7",
+"contents" => array(7836,7862,7863),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA011_SDL_9.0",
+"name" => "FRA011_SDL_9.0",
+"contents" => array(7864,7865,7459),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA012_SDL_1.0",
+"name" => "FRA012_SDL_1.0",
+"contents" => array(75617,7116,7163,7164,54535),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA012_SDL_2.0",
+"name" => "FRA012_SDL_2.0",
+"contents" => array(7118,7165,7166),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA012_SDL_3.0",
+"name" => "FRA012_SDL_3.0",
+"contents" => array(7126,7167,7168),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA012_SDL_4.0",
+"name" => "FRA012_SDL_4.0",
+"contents" => array(7172,7173,7127),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA012_SDL_5.0",
+"name" => "FRA012_SDL_5.0",
+"contents" => array(7131,7241,7243),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA012_SDL_6.0",
+"name" => "FRA012_SDL_6.0",
+"contents" => array(8180,8183,8185),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA012_SDL_7.0",
+"name" => "FRA012_SDL_7.0",
+"contents" => array(8181,8182,8184),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_1.0",
+"name" => "FRA013_SDL_1.0",
+"contents" => array(54548,79754,80790,7712,81371,7804,7807,54546,54547),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_10.0",
+"name" => "FRA013_SDL_10.0",
+"contents" => array(64921,7930,7931),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_2.0",
+"name" => "FRA013_SDL_2.0",
+"contents" => array(54553,54560,79753,7713,7810,7811,54549),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_3.0",
+"name" => "FRA013_SDL_3.0",
+"contents" => array(7714,7812,7813,54562,54563),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_4.0",
+"name" => "FRA013_SDL_4.0",
+"contents" => array(7715,7814,7815,54566,54571,79789),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_5.0",
+"name" => "FRA013_SDL_5.0",
+"contents" => array(7817,54574,54579,54583,7716,7816),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_6.0",
+"name" => "FRA013_SDL_6.0",
+"contents" => array(54587,54591,80707,81370,7717,7818,7820,54584),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_7.0",
+"name" => "FRA013_SDL_7.0",
+"contents" => array(54596,54597,7718,7821,7822,54594),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_9.0",
+"name" => "FRA013_SDL_9.0",
+"contents" => array(7722,7823,7825,54598,54599,54600),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_9.1",
+"name" => "FRA013_SDL_9.1",
+"contents" => array(76267,76268,76269),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA013_SDL_9.2",
+"name" => "FRA013_SDL_9.2",
+"contents" => array(76264,76265,76266),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_1.0",
+"name" => "FRA014_SDL_1.0",
+"contents" => array(7925,7942,7945,54661,54662,54671),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_10.0",
+"name" => "FRA014_SDL_10.0",
+"contents" => array(7933,7991,7992),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_11.0",
+"name" => "FRA014_SDL_11.0",
+"contents" => array(7996,7998,7934),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_13.0",
+"name" => "FRA014_SDL_13.0",
+"contents" => array(7935,7997,7999),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_14.0",
+"name" => "FRA014_SDL_14.0",
+"contents" => array(54678,54680,54681,81070,7936,8000,8001),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_15.0",
+"name" => "FRA014_SDL_15.0",
+"contents" => array(54683,54685,81068,81069,7937,8002,8003,54682),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_16.0",
+"name" => "FRA014_SDL_16.0",
+"contents" => array(54686,54688,54689,54691,7938,81063,8004,81066,8005,81359,8006),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_2.0",
+"name" => "FRA014_SDL_2.0",
+"contents" => array(7949,7951,7924),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_3.0",
+"name" => "FRA014_SDL_3.0",
+"contents" => array(7922,7953,7955),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_4.0",
+"name" => "FRA014_SDL_4.0",
+"contents" => array(54672,54673,7923,7957,7960),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_5.0",
+"name" => "FRA014_SDL_5.0",
+"contents" => array(7926,7970,7971),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_6.0",
+"name" => "FRA014_SDL_6.0",
+"contents" => array(7927,7972,7974),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_7.0",
+"name" => "FRA014_SDL_7.0",
+"contents" => array(7929,7977,7980,54674,54675,54676),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_8.0",
+"name" => "FRA014_SDL_8.0",
+"contents" => array(7985,7928,7983),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA014_SDL_9.0",
+"name" => "FRA014_SDL_9.0",
+"contents" => array(7932,7987,7989),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA018_SDL_0.5",
+"name" => "FRA018_SDL_0.5",
+"contents" => array(64717,64729,64573),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA018_SDL_0.8",
+"name" => "FRA018_SDL_0.8",
+"contents" => array(64718,64719,64720),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA018_SDL_1.0",
+"name" => "FRA018_SDL_1.0",
+"contents" => array(64721,64722,64728),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA018_SDL_2.0",
+"name" => "FRA018_SDL_2.0",
+"contents" => array(17650,64565,64634,76112),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA018_SDL_3.0",
+"name" => "FRA018_SDL_3.0",
+"contents" => array(17660,17700,17703,76047),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA018_SDL_6.5",
+"name" => "FRA018_SDL_6.5",
+"contents" => array(64740,64741,64748),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA018_SDL_6.6",
+"name" => "FRA018_SDL_6.6",
+"contents" => array(64742,64746,64747),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA018_SDL_6.8",
+"name" => "FRA018_SDL_6.8",
+"contents" => array(64745,64743,64744),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA018_SDL_7.0",
+"name" => "FRA018_SDL_7.0",
+"contents" => array(64749,64750,64751),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA032_SDL_1.0",
+"name" => "FRA032_SDL_1.0",
+"contents" => array(76745,76796,76797),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA032_SDL_2.0",
+"name" => "FRA032_SDL_2.0",
+"contents" => array(76798,76799,76746),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA032_SDL_3.0",
+"name" => "FRA032_SDL_3.0",
+"contents" => array(76747,76780,76781),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA032_SDL_4.0",
+"name" => "FRA032_SDL_4.0",
+"contents" => array(76748,76800,76801),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA032_SDL_5.0",
+"name" => "FRA032_SDL_5.0",
+"contents" => array(76749,76751,76782),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA032_SDL_6.0",
+"name" => "FRA032_SDL_6.0",
+"contents" => array(76753,76784,76785),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA035_SDL_2.0",
+"name" => "FRA035_SDL_2.0",
+"contents" => array(76497),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA035_SDL_3.0",
+"name" => "FRA035_SDL_3.0",
+"contents" => array(76498),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA035_SDL_4.0",
+"name" => "FRA035_SDL_4.0",
+"contents" => array(76499),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA035_SDL_5.0",
+"name" => "FRA035_SDL_5.0",
+"contents" => array(76492),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA035_SDL_6.0",
+"name" => "FRA035_SDL_6.0",
+"contents" => array(76493),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA035_SDL_7.0",
+"name" => "FRA035_SDL_7.0",
+"contents" => array(76494),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA035_SDL_8.0",
+"name" => "FRA035_SDL_8.0",
+"contents" => array(76495),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "FRA035_SDL_9.0",
+"name" => "FRA035_SDL_9.0",
+"contents" => array(76496),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_1.0",
+"name" => "REA016_SDL_1.0",
+"contents" => array(39580,39367,39578),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_11.0",
+"name" => "REA016_SDL_11.0",
+"contents" => array(39663,39396,39660),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_13.0",
+"name" => "REA016_SDL_13.0",
+"contents" => array(39386,39646,39648),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_13.5",
+"name" => "REA016_SDL_13.5",
+"contents" => array(39387,39649,39651),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_14.0",
+"name" => "REA016_SDL_14.0",
+"contents" => array(39657,39658,39385),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_15.0",
+"name" => "REA016_SDL_15.0",
+"contents" => array(39384,39675,39677),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_2.0",
+"name" => "REA016_SDL_2.0",
+"contents" => array(39369,39585,39589,76226,76227,76228),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_3.0",
+"name" => "REA016_SDL_3.0",
+"contents" => array(15377,15771,76180,76181,76229,81612,15364),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_4.0",
+"name" => "REA016_SDL_4.0",
+"contents" => array(39597,39370,39596),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_5.0",
+"name" => "REA016_SDL_5.0",
+"contents" => array(39371,39598,39599),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_6.0",
+"name" => "REA016_SDL_6.0",
+"contents" => array(76231,76232,39372,39591,39593,76230),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_7.0",
+"name" => "REA016_SDL_7.0",
+"contents" => array(15363,15779,15786,76182,76183,76184),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_8.0",
+"name" => "REA016_SDL_8.0",
+"contents" => array(39374,39622,39623),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA016_SDL_9.0",
+"name" => "REA016_SDL_9.0",
+"contents" => array(15361,15773,15775),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA036_SDL_1.0",
+"name" => "REA036_SDL_1.0",
+"contents" => array(15763,15808,15811),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA036_SDL_2.0",
+"name" => "REA036_SDL_2.0",
+"contents" => array(15778,15813,15814),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA036_SDL_3.0",
+"name" => "REA036_SDL_3.0",
+"contents" => array(15768,15816,15817),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA036_SDL_4.0",
+"name" => "REA036_SDL_4.0",
+"contents" => array(15387,15340,15344),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA036_SDL_5.0",
+"name" => "REA036_SDL_5.0",
+"contents" => array(15339,15348,15349),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA036_SDL_6.0",
+"name" => "REA036_SDL_6.0",
+"contents" => array(15345,15383,15819),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA036_SDL_7.0",
+"name" => "REA036_SDL_7.0",
+"contents" => array(15823,15825,15350),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA036_SDL_8.0",
+"name" => "REA036_SDL_8.0",
+"contents" => array(15346,15820,15822),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA036_SDL_8.5",
+"name" => "REA036_SDL_8.5",
+"contents" => array(15788),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA036_SDL_9.0",
+"name" => "REA036_SDL_9.0",
+"contents" => array(39641,79620,79621,79765,39394,39634),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_10.0",
+"name" => "REA062_SDL_10.0",
+"contents" => array(15351,15821,39405,39665,39668,15343),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_12.0",
+"name" => "REA062_SDL_12.0",
+"contents" => array(39397,39694,39724),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_13.0",
+"name" => "REA062_SDL_13.0",
+"contents" => array(39395,39763,39765),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_14.0",
+"name" => "REA062_SDL_14.0",
+"contents" => array(39404,39779,39823),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_15.0",
+"name" => "REA062_SDL_15.0",
+"contents" => array(15793,15417,15791),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_16.0",
+"name" => "REA062_SDL_16.0",
+"contents" => array(15391,15796,15800),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_16.2",
+"name" => "REA062_SDL_16.2",
+"contents" => array(76270,76271,76272),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_16.4",
+"name" => "REA062_SDL_16.4",
+"contents" => array(76274,76275,76273),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_16.6",
+"name" => "REA062_SDL_16.6",
+"contents" => array(76276,76277,76278),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_17.0",
+"name" => "REA062_SDL_17.0",
+"contents" => array(70833),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
+$container_array[] = array("type" => "SDL",
+"id" => "REA062_SDL_8.5",
+"name" => "REA062_SDL_8.5",
+"contents" => array(15362,15789,80582),
+"status_criterion" => "(#student['last_element_status'] == 'SUCCESS') ? 'SUCCESS' : ((count(#student['unattempted_elements'])==0) ? 'FAILURE' : 'IN_PROGRESS');",
+"movement_logic_within_container" => "(#student['last_element_status'] == 'SUCCESS') ? 'END' : (count(#student['unattempted_elements'])==0) ? 'END' : 'RANDOM_FROM_UNATTEMPTED';"
+);
+
 
 ?>
